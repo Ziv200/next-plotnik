@@ -1,48 +1,27 @@
 "use client";
 
-import Object from "./stage_components/Object";
+import PlanObject from "./stage_components/PlanObject";
 import { usePlan } from "../planContext";
 import { Button } from "@/components/ui/button";
 import { typeOfObject } from "../types";
 const exampleObject = {
-  id: "id",
-  name: "name",
+  id: "1234",
+  name: "acc gtr",
   typeOfObject: typeOfObject.input,
-  channelCount: 2,
+  channelCount: 1,
   stageBox: "sdrack1",
   patchNo: 1,
   mic: "di",
   stand: null,
-  icon: null,
+  icon: "/assets/icons/p_accGtr.png",
   X: 50,
   Y: 50,
   Z: 0,
-  W: 200,
-  H: 200,
+  W: 150,
+  H: 150,
   L: 90,
   showIcon: true,
   showName: true,
-  showPatchNo: true,
-  comment: null,
-};
-const exampleObject2 = {
-  id: "id2",
-  name: "name2",
-  typeOfObject: typeOfObject.input,
-  channelCount: 2,
-  stageBox: "sd1",
-  patchNo: 2,
-  mic: "di",
-  stand: null,
-  icon: null,
-  X: 30,
-  Y: 30,
-  Z: 0,
-  W: 150,
-  H: 150,
-  L: 0,
-  showIcon: true,
-  showName: false,
   showPatchNo: true,
   comment: null,
 };
@@ -53,9 +32,8 @@ const EditorStage = () => {
   return (
     <div style={{ aspectRatio: "1123/794" }} className='w-[65vw] bg-gray-200'>
       <Button onClick={() => addNewObject(exampleObject)}>Add</Button>
-      <Button onClick={() => addNewObject(exampleObject2)}>Add2</Button>
       {planDetails.planObjects.map((object) => (
-        <Object object={object} key={object.id} />
+        <PlanObject object={object} key={object.id} />
       ))}
     </div>
   );

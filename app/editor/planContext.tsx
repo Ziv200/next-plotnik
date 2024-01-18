@@ -46,7 +46,10 @@ export const PlanProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setSelectedObject(findObject ? findObject : null);
   };
 
-  const changeObjectBooleanPropety = (id: string, propetyKey: string, value: boolean) => {
+  //general change Propety function with no value type checking
+  //use after type checked in parent function
+  //this function for use only inside this file
+  const changeAnyObjectPropety = (id: string, propetyKey: string, value: any) => {
     setPlanDetails((prevPlanDetails) => {
       const newPlanObjects = prevPlanDetails.planObjects.map((object) => {
         if (object.id === id) {
@@ -65,23 +68,12 @@ export const PlanProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     });
   };
 
+  const changeObjectBooleanPropety = (id: string, propetyKey: string, value: boolean) => {
+    changeAnyObjectPropety(id, propetyKey, value);
+  };
+
   const changeObjectInputPropety = (id: string, propetyKey: string, value: number | string) => {
-    setPlanDetails((prevPlanDetails) => {
-      const newPlanObjects = prevPlanDetails.planObjects.map((object) => {
-        if (object.id === id) {
-          const updatedObject = {
-            ...object,
-            [propetyKey]: value,
-          };
-          return updatedObject;
-        }
-        return object;
-      });
-      return {
-        ...prevPlanDetails,
-        planObjects: newPlanObjects,
-      };
-    });
+    changeAnyObjectPropety(id, propetyKey, value);
   };
 
   //planObjects functions

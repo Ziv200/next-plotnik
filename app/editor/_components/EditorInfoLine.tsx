@@ -9,7 +9,7 @@ const EditorInfoLine = () => {
         <div>Click on an object to select it</div>
       ) : (
         <div className='flex flex-row w-full py-2 items-center justify-around'>
-          <p className='text-xl'>{selectedObject.type.toUpperCase()}</p>
+          <p className='text-xl'>{selectedObject.typeOfObject}</p>
           <InfoLineCell cellKey='Name' value={selectedObject.name} />
           <InfoLineCell cellKey='#No' value={selectedObject.patchNo.toString()} />
           <InfoLineCell cellKey='ChCount' value={selectedObject.channelCount.toString()} />

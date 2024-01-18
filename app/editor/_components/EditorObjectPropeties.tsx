@@ -1,6 +1,6 @@
 "use client";
 import { usePlan } from "../planContext";
-import ObjectPropetyComponent from "./object_propeties_components/ObjectPropetyComponent";
+import ObjectPropetyInputComponent from "./object_propeties_components/ObjectPropetyInputComponent";
 
 const EditorObjectPropeties = () => {
   const { selectedObject } = usePlan();
@@ -11,14 +11,14 @@ const EditorObjectPropeties = () => {
     <div className='flex flex-col gap-4 p-4 w-full'>
       <h2 className='text-center'>Propeties:</h2>
       <div className='grid grid-cols-3 '>
-        <ObjectPropetyComponent propetyKey='X' value={selectedObject.X} />
-        <ObjectPropetyComponent propetyKey='Y' value={selectedObject.Y} />
-        <ObjectPropetyComponent propetyKey='Z' value={selectedObject.Z} />
+        <ObjectPropetyInputComponent propetyKey='X' value={selectedObject.X} />
+        <ObjectPropetyInputComponent propetyKey='Y' value={selectedObject.Y} />
+        <ObjectPropetyInputComponent propetyKey='Z' value={selectedObject.Z} />
       </div>
       <div className='grid grid-cols-3 '>
-        <ObjectPropetyComponent propetyKey='W' value={selectedObject.width} />
-        <ObjectPropetyComponent propetyKey='H' value={selectedObject.height} />
-        <ObjectPropetyComponent propetyKey='L' value={selectedObject.angle} />
+        <ObjectPropetyInputComponent propetyKey='W' value={selectedObject.width} />
+        <ObjectPropetyInputComponent propetyKey='H' value={selectedObject.height} />
+        <ObjectPropetyInputComponent propetyKey='L' value={selectedObject.angle} />
       </div>
     </div>
   );

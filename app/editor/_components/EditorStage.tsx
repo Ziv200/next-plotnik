@@ -3,10 +3,11 @@
 import Object from "./stage_components/Object";
 import { usePlan } from "../planContext";
 import { Button } from "@/components/ui/button";
+import { typeOfObject } from "../types";
 const exampleObject = {
   id: "id",
   name: "name",
-  type: "input",
+  typeOfObject: typeOfObject.input,
   channelCount: 2,
   stageBox: "sdrack1",
   patchNo: 1,
@@ -27,7 +28,7 @@ const exampleObject = {
 const exampleObject2 = {
   id: "id2",
   name: "name2",
-  type: "input",
+  typeOfObject: typeOfObject.input,
   channelCount: 2,
   stageBox: "sd1",
   patchNo: 2,
@@ -47,12 +48,12 @@ const exampleObject2 = {
 };
 
 const EditorStage = () => {
-  const { planObjects, addNewObject, selectedObject } = usePlan();
+  const { planDetails, addNewObject, selectedObject } = usePlan();
   return (
     <div style={{ aspectRatio: "1123/794" }} className='w-[65vw] bg-gray-200'>
       <Button onClick={() => addNewObject(exampleObject)}>Add</Button>
       <Button onClick={() => addNewObject(exampleObject2)}>Add2</Button>
-      {planObjects.map((object) => (
+      {planDetails.planObjects.map((object) => (
         <Object object={object} key={object.id} />
       ))}
     </div>

@@ -1,8 +1,14 @@
-export interface objectType {
+export enum typeOfObject {
+  input = "INPUT",
+  output = "OUTPUT",
+  stage = "STAGE",
+}
+
+export interface PlanObjectType {
   [key: string]: any; // This is the index signature
   id: string;
   name: string;
-  type: string;
+  typeOfObject: typeOfObject;
   channelCount: number;
   stageBox: string;
   patchNo: number;

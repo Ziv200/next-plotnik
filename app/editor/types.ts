@@ -18,9 +18,9 @@ export interface PlanObjectType {
   X: number;
   Y: number;
   Z: number;
-  width: number;
-  height: number;
-  angle: number;
+  W: number;
+  H: number;
+  L: number;
   showIcon: boolean;
   showName: boolean;
   showPatchNo: boolean;

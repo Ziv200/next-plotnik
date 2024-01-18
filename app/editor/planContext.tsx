@@ -15,8 +15,9 @@ interface PlanContextType {
   planDetails: PlanDetailsType;
   addNewObject: (object: PlanObjectType) => void;
   removeObject: (id: string) => void;
+  changeObjectInputPropety: (id: string, propetyKey: string, value: number) => void;
   selectedObject: PlanObjectType | null;
-  chooseSelectedObject: (object: PlanObjectType) => void;
+  chooseSelectedObject: (id: string) => void;
 }
 
 // Create a context
@@ -34,15 +35,31 @@ export const PlanProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [selectedObject, setSelectedObject] = React.useState<PlanObjectType | null>(null);
 
   //selected object functions
-  const chooseSelectedObject = (object: PlanObjectType) => {
-    const findObject = planDetails.planObjects.find((prevObject) => prevObject.id === object.id);
+  const chooseSelectedObject = (id: string) => {
+    const findObject = planDetails.planObjects.find((prevObject) => prevObject.id === id);
     setSelectedObject(findObject ? findObject : null);
   };
 
-  const changeObjectInputPropety = (id: string, propetyKey: string, value: number) => {};
+  const changeObjectInputPropety = (id: string, propetyKey: string, value: number) => {
+    setPlanDetails((prevPlanDetails) => {
+      const newPlanObjects = prevPlanDetails.planObjects.map((object) => {
+        if (object.id === id) {
+          const updatedObject = {
+            ...object,
+            [propetyKey]: value,
+          };
+          return updatedObject;
+        }
+        return object;
+      });
+      return {
+        ...prevPlanDetails,
+        planObjects: newPlanObjects,
+      };
+    });
+  };
 
   //planObjects functions
-
   const addNewObject = (object: PlanObjectType) => {
     setPlanDetails((prevPlanDetails) => {
       return {
@@ -72,6 +89,7 @@ export const PlanProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         planDetails,
         addNewObject,
         removeObject,
+        changeObjectInputPropety,
         selectedObject,
         chooseSelectedObject,
       }}>

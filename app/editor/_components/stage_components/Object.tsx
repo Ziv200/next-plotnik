@@ -2,12 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import { usePlan } from "../../planContext";
-import { objectType } from "../../types";
-const Object = ({ object }: { object: objectType }) => {
+import { PlanObjectType } from "../../types";
+const Object = ({ object }: { object: PlanObjectType }) => {
   const { chooseSelectedObject, removeObject } = usePlan();
 
   const handleClick = () => {
-    chooseSelectedObject(object);
+    chooseSelectedObject(object.id);
   };
   return (
     <div onClick={handleClick} className='w-fit cursor-pointer'>
@@ -16,6 +16,7 @@ const Object = ({ object }: { object: objectType }) => {
       <p>{object.showName ? "true" : "false"}</p>
       <p>{object.showIcon ? "true" : "false"}</p>
       <p>{object.showPatchNo ? "true" : "false"}</p>
+      <p>{object.X}</p>
     </div>
   );
 };

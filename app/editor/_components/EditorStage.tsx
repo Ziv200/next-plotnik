@@ -48,7 +48,8 @@ const exampleObject2 = {
 };
 
 const EditorStage = () => {
-  const { planDetails, addNewObject, selectedObject } = usePlan();
+  const { planDetails, addNewObject, getSelectedObject } = usePlan();
+  const selectedObject = getSelectedObject();
   return (
     <div style={{ aspectRatio: "1123/794" }} className='w-[65vw] bg-gray-200'>
       <Button onClick={() => addNewObject(exampleObject)}>Add</Button>

@@ -16,7 +16,8 @@ const Object = ({ object }: { object: PlanObjectType }) => {
       <p>{object.showName ? "true" : "false"}</p>
       <p>{object.showIcon ? "true" : "false"}</p>
       <p>{object.showPatchNo ? "true" : "false"}</p>
-      <p>{object.X}</p>
+      <p>X{object.X}</p>
+      <p>Y{object.Y}</p>
     </div>
   );
 };

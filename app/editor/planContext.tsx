@@ -15,9 +15,10 @@ interface PlanContextType {
   planDetails: PlanDetailsType;
   addNewObject: (object: PlanObjectType) => void;
   removeObject: (id: string) => void;
-  changeObjectInputPropety: (id: string, propetyKey: string, value: number) => void;
-  selectedObject: PlanObjectType | null;
+  changeObjectInputPropety: (id: string, propetyKey: string, value: number | string) => void;
+  changeObjectBooleanPropety: (id: string, propetyKey: string, value: boolean) => void;
   chooseSelectedObject: (id: string) => void;
+  getSelectedObject: () => PlanObjectType | null;
 }
 
 // Create a context
@@ -34,13 +35,37 @@ export const PlanProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const [selectedObject, setSelectedObject] = React.useState<PlanObjectType | null>(null);
 
+  const getSelectedObject = () => {
+    const findObject = planDetails.planObjects.find((planObject) => planObject.id === selectedObject?.id) || null;
+    return findObject;
+  };
+
   //selected object functions
   const chooseSelectedObject = (id: string) => {
     const findObject = planDetails.planObjects.find((prevObject) => prevObject.id === id);
     setSelectedObject(findObject ? findObject : null);
   };
 
-  const changeObjectInputPropety = (id: string, propetyKey: string, value: number) => {
+  const changeObjectBooleanPropety = (id: string, propetyKey: string, value: boolean) => {
+    setPlanDetails((prevPlanDetails) => {
+      const newPlanObjects = prevPlanDetails.planObjects.map((object) => {
+        if (object.id === id) {
+          const updatedObject = {
+            ...object,
+            [propetyKey]: value,
+          };
+          return updatedObject;
+        }
+        return object;
+      });
+      return {
+        ...prevPlanDetails,
+        planObjects: newPlanObjects,
+      };
+    });
+  };
+
+  const changeObjectInputPropety = (id: string, propetyKey: string, value: number | string) => {
     setPlanDetails((prevPlanDetails) => {
       const newPlanObjects = prevPlanDetails.planObjects.map((object) => {
         if (object.id === id) {
@@ -90,8 +115,9 @@ export const PlanProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         addNewObject,
         removeObject,
         changeObjectInputPropety,
-        selectedObject,
+        changeObjectBooleanPropety,
         chooseSelectedObject,
+        getSelectedObject,
       }}>
       {children}
     </PlanContext.Provider>

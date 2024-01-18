@@ -2,7 +2,8 @@
 import { usePlan } from "../planContext";
 import InfoLineCell from "./info_line_components/InfoLineCell";
 const EditorInfoLine = () => {
-  const { selectedObject } = usePlan();
+  const { getSelectedObject } = usePlan();
+  const selectedObject = getSelectedObject();
   return (
     <div className='flex flex-row items-center justify-around h-[60px] bg-gray-200'>
       {!selectedObject ? (

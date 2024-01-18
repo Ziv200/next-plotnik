@@ -10,12 +10,8 @@ interface PlanDetailsType {
   band_name: string;
   planObjects: PlanObjectType[];
 }
-interface EditorSettingsType {
-  sidebarMode: "edit" | "add";
-}
 
 interface PlanContextType {
-  editorSettings: EditorSettingsType;
   planDetails: PlanDetailsType;
   addNewObject: (object: PlanObjectType) => void;
   removeObject: (id: string) => void;
@@ -36,7 +32,6 @@ export const PlanProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     band_name: "kapaim",
     planObjects: [],
   });
-  const [editorSettings, setEditorSettings] = React.useState<EditorSettingsType>({ sidebarMode: "edit" });
 
   const [selectedObject, setSelectedObject] = React.useState<PlanObjectType | null>(null);
 
@@ -108,7 +103,6 @@ export const PlanProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   return (
     <PlanContext.Provider
       value={{
-        editorSettings,
         planDetails,
         addNewObject,
         removeObject,
